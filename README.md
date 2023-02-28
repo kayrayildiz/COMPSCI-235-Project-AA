@@ -3,23 +3,19 @@ Web Application Design is EzKlap
 
 # COMPSCI 235 | Assignment phase 2
 # Web application by Kayra Yildiz and Hayden Gray 
-# kyil067@aucklanduni.ac.nz + hgra731@aucklanduni.ac.nz
+kyil067@aucklanduni.ac.nz + hgra731@aucklanduni.ac.nz
 
 
 ## Description
 
-This repository contains an implementation of the domain model from Assignment 1. 
-It contains unit tests which can be run through pytest. 
-It also contains a simple Flask application that renders content of a Book object instance from our domain model on a blank html page.
-
-Please note that this sample implementation from Assignment 1 contains a more comprehensive superset of tests compared with what we had as hidden tests on Coderunner. 
-Your domain model implementation may have to be extended to meet all test cases in the sample implementation, but you may also decide to remove or modify test cases as it suits you. 
-From here on you can choose if you want to use the provided domain model or your implementation, just make sure your chosen set of test cases always work with your implementation.
+> This repository contains a duplicated copy of my team's implementation of the domain model from Assignment 1. 
+> It contains unit tests which can be run through pytest. 
+> It also contains a simple Flask application that renders content of a Book object instance from our domain model on a blank html page.
 
 
 ## Python version
 
-Please use Python version 3.6 or newer versions for development. Some of the depending libraries of our web application do not support Python versions below 3.6!
+Please use Python version 3.6 or newer versions for development. Some of the depending libraries of our web application do not support Python versions below 3.6.
 
 
 ## Installation
