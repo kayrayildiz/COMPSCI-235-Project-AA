@@ -1,0 +1,27 @@
+<aside id="sidebar">
+    <header>
+        <h1>Recommended books</h1>
+        
+    </header>
+
+
+    {% if reading_list|length > 0%}
+        <p>Based on authors common to your reading list we have curated some books we think you might enjoy.</p>
+        {% for key in select_urls %}
+            {% if select_urls[key] != [] %}
+                <br>
+                <p>Books by {{ key }}</p>
+                {% for book in select_urls[key] %}
+                    <div>
+                        <h3>
+                            <a class="btn-nav" href="{{ book['url'] }}">{{ book['book'].title }}</a>
+                        </h3>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No recommendations were generated because your reading list is empty.</p> <br>
+        <p>To add books to your reading list choose the "add to reading list" for books found in</p> <a id="found-item" href="{{ url_for('books_bp.browse_all') }}"><p style="display: inline;">browse all.</p></a>
+    {% endif %}
+</aside>

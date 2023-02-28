@@ -1,0 +1,8 @@
+
+<body>
+    <h1>{{ a_book.title }}</h1>
+    <p>Description: {{ a_book.description }} </p> 
+    {% if a_book.release_year != None%}
+        <p> Release year: {{ a_book.release_year }}</p>
+    {% endif %}
+</body>

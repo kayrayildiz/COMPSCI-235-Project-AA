@@ -1,0 +1,26 @@
+<nav id="nav">
+  <h2 id="nav-header">
+    {% if 'user_name' in session %} Hello, {{ session['user_name'] }} 
+      <div> 
+        <p>
+          <a class="btn-header" href="{{ url_for('account_bp.view_account') }}">My account</a> 
+        </p>
+      </div>
+    {%endif %}
+  </h2>
+  <ul id="menu">
+      <li><a class="btn-nav" href="{{ url_for('home_bp.home') }}">Home</a>
+      {% if 'user_name' not in session %}
+          <li><a class="btn-nav" href="{{ url_for('authentication_bp.register') }}">Register</a></li>
+          <li><a class="btn-nav" href="{{ url_for('authentication_bp.login') }}">Login</a></li>
+      {%endif %}
+      {% if 'user_name' in session %}
+        <li><a class="btn-nav" href="{{ url_for('authentication_bp.logout') }}">Logout</a></li>
+      {%endif %}
+      <li><a class="btn-nav" href="{{ url_for('books_bp.browse_all') }}">Browse all books</a></li>
+      <li><a class="btn-nav" href="{{ url_for('books_bp.books_by_year') }}">Browse by year</a></li>
+      <li><a class="btn-nav" href="{{ url_for('books_bp.books_by_author') }}">Browse by author</a></li>
+      <li><a class="btn-nav" href="{{ url_for('books_bp.books_by_publisher') }}">Browse by publisher</a></li>
+      <li><a class="btn-nav" href="{{ url_for('search_bp.search_book') }}">Search a book</a></li>
+  </ul>
+</nav>

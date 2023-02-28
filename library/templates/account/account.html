@@ -1,0 +1,18 @@
+{% extends 'layout.html' %} {% block content %}
+<main id="main">
+    <h1>Hello, {{ session['user_name'] }}, here is your reading list!</h1>
+    <br>
+    {% if reading_list|length > 0 %}
+
+        {% for key in reading_list_urls %}
+            <a class="reading-list" href="{{ reading_list_urls[key] }}">{{ key }}</a>
+        {% endfor %}
+
+    {% else %}
+        <p>Oh no, looks like your reading list is empty.</p>
+        <p style="display: inline;">You can add books to your reading list from our</p> <a id="found-item" href="{{ url_for('books_bp.browse_all') }}"><p style="display: inline;">browse all</p></a> <p style="display: inline;">page, just click the "add to reading list" button</p>
+        
+
+    {% endif %}
+</main>
+{% endblock %}

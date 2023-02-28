@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    {% if all_books_page is true %}
+        <div style="float:left">
+            {% if added is not true %}
+                <button class="btn-general" onclick="location.href='{{ add_to_readinglist_url }}'">Add to reading list</button>
+            {% else %}
+                <button class="btn-general-disabled">Added to reading list</button>
+            {% endif %}
+        </div>
+        <br>
+    {% endif %}
+
+    <header id="book-header">
+        <h1>{{ title }}</h1>
+        <br>
+        <h1>{{ specific_title }}</h1>
+    </header>
+
+    <nav style="clear:both">
+            <div style="float:left">
+                {% if first_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{first_url}}'">First</button>
+                {% endif %}
+                {% if prev_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{prev_url}}'">Previous</button>
+                {% endif %}
+            </div>
+            <div style="float:right">
+                {% if next_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{next_url}}'">Next</button>
+                {% endif %}
+                {% if last_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{last_url}}'">Last</button>
+                {% endif %}
+            </div>
+        </nav>
+        
+        <br>
+        {% for book in current_books %} <!--LOOP THROUGH BOOKS-->
+            <!--BOOK-->
+            <br>
+            <p><b>{{ book.title }}</b></p>
+            <p>Written by {% for author in book.authors %}{% if author != book.authors[0]%}, {{author.full_name}}{% else %} {{author.full_name}}{% endif %}{% endfor %}</p>
+            {% if book.publisher.name != "N/A" %}<p>Published by {{ book.publisher.name }}</p>{% endif %}
+            <br>
+            <p>{{ book.description }}</p>
+            {% if book.release_year is not none %}<br><p>Released in {{ book.release_year }}</p>{% endif%}
+            
+        
+            <!--BOOK'S REVIEWS-->
+            {% if all_books_page is true %}
+                <div style="float:right">
+                    <button class="btn-general" onclick="location.href='{{ write_review_url }}'">Review</button>
+                </div>
+            {% endif %}
+            <div style="clear:both">
+                {% if all_books_page is true %}
+                    {% if number_of_reviews == 1 %}<p>{{ number_of_reviews }} review</p>{% else %}<p>{{ number_of_reviews }} reviews</p>{% endif %}
+                {% endif %}
+                
+                {% for review in book.reviews %}
+                    {% if review.rating == 1 %}
+                        <p>⭐️ | {{ review.review_text }}, by {{ review.user.user_name }}, {{ review.timestamp }}</p>
+                    {% elif review.rating== 2 %}
+                        <p>⭐️⭐️ | {{ review.review_text }}, by {{ review.user.user_name }}, {{ review.timestamp }}</p>
+                    {% elif review.rating == 3 %}
+                        <p>⭐️⭐️⭐️ | {{ review.review_text }}, by {{ review.user.user_name }}, {{ review.timestamp }}</p>
+                    {% elif review.rating == 4 %}
+                        <p>⭐️⭐️⭐️⭐️ | {{ review.review_text }}, by {{ review.user.user_name }}, {{ review.timestamp }}</p>
+                    {% else %}
+                        <p>⭐️⭐️⭐️⭐️⭐️ | {{ review.review_text }}, by {{ review.user.user_name }}, {{ review.timestamp }}</p>
+                    {% endif %}
+                    <!--SIMPLE METHOD: <p><b>{{ review.rating }}/5</b> | {{ review.review_text }}, by {{ review.user_name }}, {{ review.timestamp }}</p>-->
+                    
+                {% endfor %}
+            </div>
+            
+            <p>_______________________</p> <!-- separates books by a line -->
+        
+        {% endfor %}
+</main>
+{% endblock %}

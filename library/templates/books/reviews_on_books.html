@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} {% block content %}
+
+<main id="main">
+    <header>
+        <h1>Write a review</h1>
+    </header>
+
+    <div style="clear:both">
+        <br>
+        <h2>Reviewing: {{book.title}}</h2>
+        
+        <div class="form-wrapper">
+            <form action="{{handler_url}}" method="post">
+                {{form.book_id}} <!-- Need to include this hidden field as it tracks the book being reviewed. -->
+                {{form.csrf_token}} <!-- Need to include this token - Flask WTForms requires it. -->
+                <br>
+                <div class="form-field">{{form.review.label}} </br>{{form.review(size = 100, placeholder="type your review", class="textarea", cols="50", rows="6", wrap="hard")}}
+                    {% if form.review.errors %}
+                        <ul class="errors">
+        	            {% for error in form.review.errors %}
+        		            <li>{{error}}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+
+                
+                {{ form.rating.label }}
+                {% for subfield in form.rating %}
+                <tr>
+                    <td>{{ subfield }}</td>
+                    <td>{{ subfield.label }}</td>
+                </tr>
+                {% endfor %}    
+                
+                
+                {{ form.submit }}
+            </form>
+        </div>
+
+        
+
+        <div style="clear:both">
+            {% for review in book.reviews %}
+                <p>{{review.review_text}}, by {{review.user_name}}, {{review.timestamp}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
+

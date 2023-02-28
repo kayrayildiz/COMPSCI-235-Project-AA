@@ -1,0 +1,33 @@
+{% block content %}
+<main id="main">
+    <div style="clear:both">
+        <div class="formwrapper">
+            <h1 class="title">Search {{ search_type }}</h1>
+            <form method="POST" action="{{ handler_url }}">
+                {{ form.csrf_token }} 
+                <div class="form-field">
+                    {{ form.keyword.label }} {{ form.keyword }}
+                </div>
+                {{ form.submit }}
+            </form>
+        </div>
+    </div>
+
+    <br><br>
+    
+
+    {% if length > 0 %}
+        {% if length == 1 %} <h2>1 item matched your search!</h2> <br> {% else %} <h2>{{ length }} items matched your search!</h2> <br> {% endif %}
+        
+        {% for book in books %}
+            <a id="found-item" href="{{ url_for('books_bp.browse_all', title=book.title) }}"><p> {{ book.title }}, written by {% for author in book.authors %}{% if author != book.authors[0]%}, {{author.full_name}}{% else %} {{author.full_name}}{% endif %}{% endfor %}</p></a> <!-- links to specic book-->
+        {% endfor %}
+    {% else %}
+        {% if no_book_found_statement is true %}
+            <h2>oops! looks like no items matched your search</h2> <br>
+            <p>Perhaps try a different title?</p>
+        {% endif %}
+    {% endif %}
+
+</main>
+{% endblock %}

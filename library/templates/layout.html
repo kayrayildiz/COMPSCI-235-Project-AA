@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assembled Abnormally</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  </head>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <body>
+    <div id="body">
+      {% include 'navigation.html' %}
+      <div id="content-2">
+        {% include 'header.html' %}
+        <div id="container">
+          {% block content %} {% endblock %}
+          {% if include_side_bar is true %}
+            {% include 'sidebar.html' %} <!-- SIDEBAR FOR SPECIFICE BROWSING NAVIGATIONS -->
+          {% endif %}
+          {% if include_recommendations %}
+            {% include 'recommendations.html' %} <!-- SIDE BAR FOR USER ACCOUNT RECOMMENDATIONS -->
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

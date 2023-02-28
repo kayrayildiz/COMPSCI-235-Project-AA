@@ -1,0 +1,15 @@
+<aside id="sidebar">
+    <header>
+        <h1>Select {{ select_type }}</h1>
+    </header>
+
+
+
+    {% for key in select_urls %}
+    <div>
+        <h3>
+            <a class="btn-nav" href="{{ select_urls[key] }}">{{ key }}</a>
+        </h3>
+    </div>
+    {% endfor %}
+</aside>
